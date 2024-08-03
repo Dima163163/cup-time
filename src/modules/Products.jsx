@@ -1,9 +1,19 @@
 import Product from './Product';
 
-import { products } from '../products';
+import { useEffect } from 'react';
+import { useProducts } from '../context/ProductContext';
+import { useSearchParams } from 'react-router-dom';
 
 
 const Products = () => {
+  const [searchParams] = useSearchParams(); 
+  const {products, setCategory} = useProducts();
+  const category = searchParams.get('category')
+
+  useEffect(() => {
+    setCategory(category)
+  }, [category, setCategory])
+
 	return (
 		<section className="products">
 			<div className="container">
